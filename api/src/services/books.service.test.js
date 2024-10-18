@@ -8,9 +8,11 @@ const fakeBooks = [
   }
 ];
 
+const mockGetAll = jest.fn() // SPY
+
 const mongoLibStub = {
-  getAll: () => [...fakeBooks],
-  create: () => []
+  getAll: mockGetAll,
+  create: () => {}
 };
 
 jest.mock('../lib/mongo.lib.js', () => jest.fn().mockImplementation(() => mongoLibStub))
@@ -24,9 +26,12 @@ describe('list service BooksService', () => {
 
   describe('test getBooks', () => {
     test('shuold run getBook', async () => {
-      let books = await service.getBooks()
+      let books = await service.getBooks({})
+      mockGetAll.mockResolvedValue(fakeBooks)
       console.log(books)
       expect(books.length).toEqual(1)
+      expect(mockGetAll).toHaveBeenCalled()
+      expect(mockGetAll).toHaveBeenCalledWith('books', {})
     })
   })
 })
