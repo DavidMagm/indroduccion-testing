@@ -1,37 +1,32 @@
-const BooksService = require('./books.service')
+const { generateManyBooks } = require('../fakes/books.fake');
+const BooksService = require('./books.service');
 
-//MOCKING
-const fakeBooks = [
-  {
-    id: 1,
-    name: "Harry Potter"
-  }
-];
+// MOCKING
 
-const mockGetAll = jest.fn() // SPY
+const mockGetAll = jest.fn(); // SPY
 
-const mongoLibStub = {
+jest.mock('../lib/mongo.lib.js', () => jest.fn().mockImplementation(() => ({
   getAll: mockGetAll,
-  create: () => {}
-};
-
-jest.mock('../lib/mongo.lib.js', () => jest.fn().mockImplementation(() => mongoLibStub))
+  create: () => {},
+})));
 // MOCKING
 
 describe('list service BooksService', () => {
-  let service
+  let service;
   beforeEach(() => {
-    service = new BooksService
-  })
+    service = new BooksService();
+    jest.clearAllMocks();
+  });
 
   describe('test getBooks', () => {
     test('shuold run getBook', async () => {
-      let books = await service.getBooks({})
-      mockGetAll.mockResolvedValue(fakeBooks)
-      console.log(books)
-      expect(books.length).toEqual(1)
-      expect(mockGetAll).toHaveBeenCalled()
-      expect(mockGetAll).toHaveBeenCalledWith('books', {})
-    })
-  })
-})
+      const fakeBooks = generateManyBooks(20);
+      mockGetAll.mockResolvedValue(fakeBooks);
+      const books = await service.getBooks({});
+      console.log(books);
+      expect(books.length).toEqual(fakeBooks.length);
+      expect(mockGetAll).toHaveBeenCalled();
+      expect(mockGetAll).toHaveBeenCalledWith('books', {});
+    });
+  });
+});
