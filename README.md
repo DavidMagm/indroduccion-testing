@@ -9,6 +9,10 @@ claro el testing puede implementarse en las diferentes fases del desarrollo de u
 - Test o QA
 - Produccion
 
+## Herramientas
+en este repaso del testing las herramientas que vamos a utilizar es **Jest** que tiene una estructura agnostica a la hora de escribir pruebas, en ñas pruebas estaticas utilizaresmos **Eslint** y para hacer las pruebas 
+**End to End** vamos a utilizar un "fraude" de una base de datos y aparte crearemos un base de datos de prueba para las pruebas de UI
+
 entre mas temprano encontremos un error y los solucionemos mas facil y baratos sera implementarlo en el proyecto en fase de requerimientos es mas sencillo solucionar un error y entre mas avanzamos se complica un poco mas
 
 en los test vamos a tener un **SUT** que seria *System Under Test* que en tes caso de pruebas unitarias seria mas *Subject Under Test*. Tambien es bueno que tengamos en cuenta los conceptos de validar y verificar
