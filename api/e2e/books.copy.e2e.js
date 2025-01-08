@@ -20,7 +20,6 @@ describe('test hello world endpoint', () => {
     await client.connect();
     dataBase = client.db(DB_NAME);
   });
-
   afterAll(async () => {
     await server.close();
     await dataBase.dropDatabase();

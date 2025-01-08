@@ -9,8 +9,22 @@ claro el testing puede implementarse en las diferentes fases del desarrollo de u
 - Test o QA
 - Produccion
 
+Para esta prubas vamos a instalar la dependencia de desarrollo de Jest
+
+```
+npm install --save-dev jest
+```
+
+En las prubas de la carpeta de api vamos a necesitar data fake de una estructura de libros para eso usaremos la herramienta de api Faker.JS
+
+```
+npm install @faker-js/faker --save-dev
+
+```
+
+
 ## Herramientas
-en este repaso del testing las herramientas que vamos a utilizar es **Jest** que tiene una estructura agnostica a la hora de escribir pruebas, en ñas pruebas estaticas utilizaresmos **Eslint** y para hacer las pruebas 
+en este repaso del testing las herramientas que vamos a utilizar es **Jest** que tiene una estructura agnostica a la hora de escribir pruebas, en ñas pruebas estaticas utilizaresmos **Eslint** y para hacer las pruebas
 **End to End** vamos a utilizar un "fraude" de una base de datos y aparte crearemos un base de datos de prueba para las pruebas de UI
 
 entre mas temprano encontremos un error y los solucionemos mas facil y baratos sera implementarlo en el proyecto en fase de requerimientos es mas sencillo solucionar un error y entre mas avanzamos se complica un poco mas
@@ -52,3 +66,13 @@ este metodo de hacer pruebas se centra en los datos de entradas y los datos de s
 
 ### Caja blanca
 este metodo se centra mas en el comportamiento claro que queremos que nos devuelva el resultado esperado (output) pero tembien queremos ver como se comporta una dependencia, framework, libreria o que aya corrido un Query de una base de datos si es lo que queremos testear
+
+## Pruebas de integracion
+
+La mayor parte de esta prubas estan en la carta de api, por cierto las prubas de integracion a diferencias de las unitarias se ponen en una carpeta aparte esta se encuentra en api/e2e y el api/e2e/jest-e2e.json el archivo de cofiguracion para decirle a Jest como quiero que se comporte mis pruebas para estas purbas vamos a usar Supertest como herramineta de desarrollo
+
+```
+npm install supertest --save-dev
+```
+
+este supertest nos servira para hacer un request del endpoint inicial cuando cargamos la app esto esta en el archivo api/app.js donde esta nuestro servidor con express y debria retornanos un Hello World!
